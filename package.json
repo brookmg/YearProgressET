@@ -1,0 +1,41 @@
+{
+  "name": "yearprogresset",
+  "version": "1.0.0",
+  "description": "I tell the year progress according to the Ethiopian calendar",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel src --out-dir dist && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brookmg/yearprogresset.git"
+  },
+  "keywords": [
+    "year-progress",
+    "ethiopia",
+    "date",
+    "twitter"
+  ],
+  "author": "Brook Mezgebu",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/brookmg/yearprogresset/issues"
+  },
+  "homepage": "https://github.com/brookmg/yearprogresset#readme",
+  "dependencies": {
+    "abushakir": "^1.2.1",
+    "dotenv": "^8.2.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
+    "babel-core": "7.0.0-bridge.0",
+    "jest": "^26.5.2",
+    "supertest": "^5.0.0"
+  }
+}
