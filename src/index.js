@@ -49,7 +49,7 @@ function ትዊት() {
     });
 
     const data = progress()
-    const status = data.ascii + ' ' + data.progressAm
+    const status = data.ascii + ' ' + data.progressAm + ' (' + Math.round(data.progress) + '%)'
 
     console.dir({ status })
 
