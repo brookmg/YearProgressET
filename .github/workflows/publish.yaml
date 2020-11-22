@@ -30,6 +30,8 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install npm modules
       run: npm install
+    - name: Build
+      run: npm run build
     - name: ትዊት
       env:
         TWITTER_ACCESS_TOKEN_KEY: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
