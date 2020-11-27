@@ -1,5 +1,7 @@
 import { ConvertToEthiopic , EtDatetime, ETC, BahireHasab } from 'abushakir'
 const Twitter = require('twitter');
+const fsPromise = require('fs/promises');
+const fs = require('fs');
 
 require('dotenv').config();
 
@@ -40,6 +42,18 @@ function getASCIIProgressFromPt(pt) {
     return finalResult;
 }
 
+async function shouldItTweet(progress) {
+    const fileExist = fs.existsSync('./progress.txt')
+    if (!fileExist) {
+        await fsPromise.writeFile('./progress.txt' , progress.toString())
+        return true; // File didn't exist 
+    } else {
+        const fileContent = Number.parseInt(await fsPromise.readFile('./progress.txt'))
+        await fsPromise.writeFile('./progress.txt' , progress.toString())
+        return (progress > fileContent)
+    }
+}
+
 function ትዊት() {
     let client = new Twitter({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -53,10 +67,15 @@ function ትዊት() {
 
     console.dir({ status })
 
-    client.post('statuses/update', { status }, (error, tweet, response) => {
-        if(error) throw error;
+    shouldItTweet(Math.round(data.progress)).then(result => {
+        if (result) {
+            client.post('statuses/update', { status }, (error, tweet, response) => {
+                if(error) throw error;
+            })        
+        } else {
+            console.log('Progress didn\'t change')
+        }
     })
-
 }
 
 ትዊት()
