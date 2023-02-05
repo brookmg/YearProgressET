@@ -36,11 +36,13 @@ jobs:
         TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
         TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
         TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_LINK: ${{ secrets.TELEGRAM_LINK }}
       run: npm run start
     - name: commit progress increments
       run: |
         git config --global user.name 'Brook Mezgebu'
         git config --global user.email 'brook.mezgebu.dev@gmail.com'
         git add .
-        git commit -am "github: year progress incremented"
+        git commit -am "github: year progress incremented" || true
         git push
