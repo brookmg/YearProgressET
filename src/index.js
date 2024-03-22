@@ -62,6 +62,19 @@ function sendToTelegram(botToken, text) {
         })
 }
 
+function sendToMultipleTelegramGroups(botToken, text, groupIds) {
+    for (let groupId of groupIds) {
+        let url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${groupId}&text=${text}`
+        if (groupId.match(/@/g).length > 1) {
+            url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=@${groupId.split('@')[1]}&text=${text}&message_thread_id=${groupId.split('@')[2]}`
+        }
+        axios.get(url).then(r => console.dir(r))
+            .catch(e => {
+                console.error(`Failed to send message to group ${groupId}:`, e);
+            })
+    }
+}
+
 function publish() {
     let client = new Twitter({
         consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -82,6 +95,10 @@ function publish() {
             })
 
             sendToTelegram(process.env.TELEGRAM_BOT_TOKEN, status)
+            
+            // for forum support add the group username with @groupname@threadid
+            const groupIds = ["@dagmawibabichat"];
+            sendToMultipleTelegramGroups(process.env.TELEGRAM_BOT_TOKEN, status, groupIds);
         } else {
             console.log('Progress didn\'t change')
         }
