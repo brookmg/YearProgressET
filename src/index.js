@@ -97,7 +97,7 @@ function publish() {
             sendToTelegram(process.env.TELEGRAM_BOT_TOKEN, status)
             
             // for forum support add the group username with @groupname@threadid
-            const groupIds = ["@dagmawibabichat"];
+            const groupIds = ["@dagmawibabichat@11131"];
             sendToMultipleTelegramGroups(process.env.TELEGRAM_BOT_TOKEN, status, groupIds);
         } else {
             console.log('Progress didn\'t change')
