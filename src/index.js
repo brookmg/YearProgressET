@@ -10,13 +10,14 @@ function progress() {
     let nowInEt = new EtDatetime()
     let firstDayOfNextYear = new EtDatetime(nowInEt.date.year +1 , 1, 1)
     let diff = firstDayOfNextYear.difference(nowInEt).inDays;
+    let p = Math.round(100 - (diff / 365) * 100);
 
     return {
         progress: 100 - (diff / 365) * 100,
         ascii: getASCIIProgressFromPt(100 - (diff / 365) * 100),
         daysRemaining: diff,
         daysRemainingAm: ConvertToEthiopic(diff),
-        progressAm: ConvertToEthiopic(Math.round(100 - (diff / 365) * 100)) + '%'
+        progressAm: (p > 0 ? ConvertToEthiopic(p) : '0' ) + '%'
     };
 }
 
