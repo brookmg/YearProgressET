@@ -39,5 +39,8 @@
     "babel-core": "7.0.0-bridge.0",
     "jest": "^26.5.2",
     "supertest": "^5.0.0"
+  },
+  "overrides": {
+    "form-data": "2.5.4"
   }
 }
